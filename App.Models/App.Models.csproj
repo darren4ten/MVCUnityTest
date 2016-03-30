@@ -70,6 +70,7 @@
     <Compile Include="SysSample.cs">
       <DependentUpon>MyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sys\SysSampleModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

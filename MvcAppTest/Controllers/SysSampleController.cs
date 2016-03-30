@@ -1,4 +1,6 @@
 ﻿using App.BLL;
+using App.IBLL;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,11 @@ namespace MvcAppTest.Controllers
     {
         //
         // GET: /SysSample/
-
+        [Dependency]
+        public ISysSampleBLL bll { get; set; }
         public ActionResult Index()
         {
-            var data = new SysSampleBLL().GetList("");
+            var data = bll.GetList("");
             return View(data);
         }
 

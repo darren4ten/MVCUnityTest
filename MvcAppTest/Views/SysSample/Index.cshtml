@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SysSample>
+﻿@model List<App.Models.Sys.SysSampleModel>
 
 @{
     Layout = null;
@@ -18,22 +18,22 @@
     <table>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                名称
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Age)
+                年龄
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Bir)
+                生日
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Photo)
+                照片
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Note)
+                备注
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreateTime)
+                创建时间
             </th>
             <th></th>
         </tr>
@@ -70,4 +70,3 @@
     </table>
 </body>
 </html>
-Index.cshtml

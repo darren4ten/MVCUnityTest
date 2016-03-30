@@ -2,6 +2,8 @@
 using App.IBLL;
 using App.IDAL;
 using App.Models;
+using App.Models.Sys;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +15,8 @@ namespace App.BLL
     public class SysSampleBLL : ISysSampleBLL
     {
         Entities db = new Entities();
-
-        ISysSampleRepository Rep = new SysSampleRepository();
+        [Dependency]
+        public ISysSampleRepository Rep { get; set; }
 
         /// <summary>
         /// 获取列表
@@ -22,13 +24,31 @@ namespace App.BLL
         /// <param name="pager">JQgrid分页</param>
         /// <param name="queryStr">搜索条件</param>
         /// <returns>列表</returns>
-        public List<SysSample> GetList(string queryStr)
+        public List<SysSampleModel> GetList(string queryStr)
         {
 
             IQueryable<SysSample> queryData = Rep.GetList(db);
+            return CreateModelList(ref queryData);
+        }
+
+        private List<SysSampleModel> CreateModelList(ref IQueryable<SysSample> queryData)
+        {
 
 
-            return queryData.ToList();
+            List<SysSampleModel> modelList = (from r in queryData
+                                              select new SysSampleModel
+                                              {
+                                                  Id = r.Id,
+                                                  Name = r.Name,
+                                                  Age = r.Age,
+                                                  Bir = r.Bir,
+                                                  Photo = r.Photo,
+                                                  Note = r.Note,
+                                                  CreateTime = r.CreateTime,
+
+                                              }).ToList();
+
+            return modelList;
         }
 
         /// <summary>
@@ -37,17 +57,31 @@ namespace App.BLL
         /// <param name="errors">持久的错误信息</param>
         /// <param name="model">模型</param>
         /// <returns>是否成功</returns>
-        public bool Create(SysSample entity)
+        public bool Create(SysSampleModel model)
         {
             try
             {
+
+                SysSample entity = Rep.GetById(model.Id);
+                if (entity != null)
+                {
+                    return false;
+                }
+                entity = new SysSample();
+                entity.Id = model.Id;
+                entity.Name = model.Name;
+                entity.Age = model.Age;
+                entity.Bir = model.Bir;
+                entity.Photo = model.Photo;
+                entity.Note = model.Note;
+                entity.CreateTime = model.CreateTime;
+
                 if (Rep.Create(entity) == 1)
                 {
                     return true;
                 }
                 else
                 {
-
                     return false;
                 }
             }
@@ -89,10 +123,22 @@ namespace App.BLL
         /// <param name="errors">持久的错误信息</param>
         /// <param name="model">模型</param>
         /// <returns>是否成功</returns>
-        public bool Edit(SysSample entity)
+        public bool Edit(SysSampleModel model)
         {
             try
             {
+                SysSample entity = Rep.GetById(model.Id);
+                if (entity == null)
+                {
+                    return false;
+                }
+                entity.Name = model.Name;
+                entity.Age = model.Age;
+                entity.Bir = model.Bir;
+                entity.Photo = model.Photo;
+                entity.Note = model.Note;
+
+
                 if (Rep.Edit(entity) == 1)
                 {
                     return true;
@@ -102,7 +148,6 @@ namespace App.BLL
 
                     return false;
                 }
-
             }
             catch (Exception ex)
             {
@@ -129,14 +174,21 @@ namespace App.BLL
         /// </summary>
         /// <param name="id">id</param>
         /// <returns>实体</returns>
-        public SysSample GetById(string id)
+        public SysSampleModel GetById(string id)
         {
             if (IsExist(id))
             {
                 SysSample entity = Rep.GetById(id);
+                SysSampleModel model = new SysSampleModel();
+                model.Id = entity.Id;
+                model.Name = entity.Name;
+                model.Age = entity.Age;
+                model.Bir = entity.Bir;
+                model.Photo = entity.Photo;
+                model.Note = entity.Note;
+                model.CreateTime = entity.CreateTime;
 
-
-                return entity;
+                return model;
             }
             else
             {
