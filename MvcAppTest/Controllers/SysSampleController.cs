@@ -1,5 +1,6 @@
 ﻿using App.BLL;
 using App.IBLL;
+using App.Models.Sys;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,28 @@ namespace MvcAppTest.Controllers
         {
             var data = bll.GetList("");
             return View(data);
+        }
+
+        public JsonResult GetList()
+        {
+            var data = bll.GetList("");
+            var jsonData =
+                new
+                {
+                    total = data.Count,
+                    rows = data.Select(p =>
+                      new SysSampleModel{
+                        Id=p.Id,
+                        Age=p.Age,
+                        Bir=p.Bir,
+                        Name=p.Name,
+                        Note=p.Note,
+                        Photo=p.Photo,
+                        CreateTime=p.CreateTime
+                      }
+                    )
+                };
+            return Json(jsonData,JsonRequestBehavior.AllowGet);
         }
 
     }
