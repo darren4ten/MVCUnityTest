@@ -1,4 +1,5 @@
-﻿using App.IDAL;
+﻿using App.Common;
+using App.IDAL;
 using App.Models;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,42 @@ using System.Threading.Tasks;
 namespace App.DAL
 {
     public class SysSampleRepository : ISysSampleRepository, IDisposable
-    {  /// <summary>
+    {
+        Entities db = new Entities();
+        /// <summary>
         /// 获取列表
         /// </summary>
         /// <param name="db">数据库上下文</param>
         /// <returns>数据列表</returns>
-        public IQueryable<SysSample> GetList(Entities db)
+        public IQueryable<SysSample> GetList(GridPager pager)
         {
+
             IQueryable<SysSample> list = db.SysSamples.AsQueryable();
-            return list;
+            pager.totalRows = GetTotalNumber();
+            pager.order = string.IsNullOrEmpty(pager.order) ? "id" : pager.order;
+            switch (pager.order.ToLower())
+            {
+                case "id": {
+                    return list.OrderBy(p => p.Id).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+                }; 
+                case "name": {
+                    return list.OrderBy(p => p.Name).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+                }; 
+                case "age": {
+                    return list.OrderBy(p => p.Age).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+                };
+                case "CreateTime": {
+                    return list.OrderBy(p => p.CreateTime).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+                }; 
+                default:
+                    return list.OrderBy(p => p.Id).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+            }
+           
+        }
+
+        public int GetTotalNumber()
+        {
+            return db.SysSamples.Count();
         }
         /// <summary>
         /// 创建一个实体

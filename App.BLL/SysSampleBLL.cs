@@ -1,4 +1,5 @@
-﻿using App.DAL;
+﻿using App.Common;
+using App.DAL;
 using App.IBLL;
 using App.IDAL;
 using App.Models;
@@ -24,10 +25,10 @@ namespace App.BLL
         /// <param name="pager">JQgrid分页</param>
         /// <param name="queryStr">搜索条件</param>
         /// <returns>列表</returns>
-        public List<SysSampleModel> GetList(string queryStr)
+        public List<SysSampleModel> GetList(GridPager pager)
         {
 
-            IQueryable<SysSample> queryData = Rep.GetList(db);
+            IQueryable<SysSample> queryData = Rep.GetList(pager);
             return CreateModelList(ref queryData);
         }
 

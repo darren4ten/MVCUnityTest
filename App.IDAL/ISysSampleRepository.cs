@@ -1,4 +1,5 @@
-﻿using App.Models;
+﻿using App.Common;
+using App.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace App.IDAL
         /// </summary>
         /// <param name="db">数据库上下文</param>
         /// <returns>数据列表</returns>
-        IQueryable<SysSample> GetList(Entities db);
+        IQueryable<SysSample> GetList(GridPager pager);
         /// <summary>
         /// 创建一个实体
         /// </summary>

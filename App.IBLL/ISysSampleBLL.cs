@@ -1,4 +1,5 @@
-﻿using App.Models.Sys;
+﻿using App.Common;
+using App.Models.Sys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace App.IBLL
         /// <param name="pager">JQgrid分页</param>
         /// <param name="queryStr">搜索条件</param>
         /// <returns>列表</returns>
-        List<SysSampleModel> GetList(string queryStr);
+        List<SysSampleModel> GetList(GridPager grid);
         /// <summary>
         /// 创建一个实体
         /// </summary>

@@ -47,6 +47,10 @@
     <Compile Include="SysSampleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\App.Common\App.Common.csproj">
+      <Project>{41654043-70b7-41d5-9806-cce1c183edca}</Project>
+      <Name>App.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\App.IDAL\App.IDAL.csproj">
       <Project>{737d8c08-b7ae-4685-96a0-24210f39fbc3}</Project>
       <Name>App.IDAL</Name>
