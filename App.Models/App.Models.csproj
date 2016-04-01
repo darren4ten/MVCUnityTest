@@ -67,6 +67,9 @@
       <DependentUpon>MyDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysModule.cs">
+      <DependentUpon>MyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="SysSample.cs">
       <DependentUpon>MyDB.tt</DependentUpon>
     </Compile>

@@ -7,16 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
-public partial class SysSample
+namespace App.Models
 {
-    public string Id { get; set; }
-    public string Name { get; set; }
-    public Nullable<int> Age { get; set; }
-    public Nullable<System.DateTime> Bir { get; set; }
-    public string Photo { get; set; }
-    public string Note { get; set; }
-    public Nullable<System.DateTime> CreateTime { get; set; }
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class SysSample
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> Age { get; set; }
+        public Nullable<System.DateTime> Bir { get; set; }
+        public string Photo { get; set; }
+        public string Note { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
+    }
 }

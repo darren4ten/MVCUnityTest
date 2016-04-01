@@ -26,13 +26,6 @@ namespace App.Models
         }
     
         public virtual DbSet<SysSample> SysSamples { get; set; }
-        public void test()
-        {
-            
-            Entities en = new Entities();
-            en.SysSamples.Add(new SysSample());
-            en.Entry<SysSample>(new SysSample()).State = EntityState.Added;
-            en.SaveChanges();
-        }
+        public virtual DbSet<SysModule> SysModules { get; set; }
     }
 }
