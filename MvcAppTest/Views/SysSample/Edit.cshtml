@@ -6,30 +6,36 @@
 <script>
     $(function () {
         $("#btnSave").click(function () {
-
-            $.ajax({
-                url: "/SysSample/Edit",
-                type: "Post",
-                data: $("#EditForm").serialize(),
-                dataType: "json",
-                success: function (data) {
-                    if (data == 1) {
-                        window.parent.frameReturnByMes("成功");
-                        window.parent.frameReturnByReload(true);
-                        window.parent.frameReturnByClose()
+            if ($("#EditForm").valid()) {
+                $.ajax({
+                    url: "/SysSample/Edit",
+                    type: "Post",
+                    data: $("#EditForm").serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes(data.message);
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        }
+                        else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    },
+                    failed: function (xhr,statusText) {
+                        window.parent.frameReturnByMes("更新失败,"+xhr+","+statusText);
                     }
-                    else {
-                        window.parent.frameReturnByMes("失败");
-                    }
-                }
-            });
+                });
+            } else {
+                alert("请改正错误之后重试！");
+            }
         });
     });
 </script>
 <div class="mvctool bgb">
     <a id="btnSave" style="float: left;" class="l-btn l-btn-plain"><span class="l-btn-left"><span class="l-btn-text icon-save" style="padding-left: 20px;">保存</span></span></a>
 </div>
-@using (Html.BeginForm("Edit", "SysSample",null, FormMethod.Post,new {id="EditForm"}))
+@using (Html.BeginForm("Edit", "SysSample", null, FormMethod.Post, new { id = "EditForm" }))
 {
     <table class="fromEditTable setTextWidth300">
         <tbody>

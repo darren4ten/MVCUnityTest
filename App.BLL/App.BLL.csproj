@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ExceptionHander.cs" />
+    <Compile Include="Common\LogHandler.cs" />
     <Compile Include="HomeBLL.cs" />
     <Compile Include="SysExceptionBLL.cs" />
     <Compile Include="SysLogBLL.cs" />

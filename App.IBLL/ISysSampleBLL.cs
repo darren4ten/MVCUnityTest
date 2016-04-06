@@ -23,7 +23,7 @@ namespace App.IBLL
         /// <param name="errors">持久的错误信息</param>
         /// <param name="model">模型</param>
         /// <returns>是否成功</returns>
-        bool Create(SysSampleModel model);
+        bool Create(SysSampleModel model,ref ValidationErrors errors);
         /// <summary>
         /// 删除一个实体
         /// </summary>
@@ -38,7 +38,7 @@ namespace App.IBLL
         /// <param name="errors">持久的错误信息</param>
         /// <param name="model">模型</param>
         /// <returns>是否成功</returns>
-        bool Edit(SysSampleModel model);
+        bool Edit(SysSampleModel model, ref ValidationErrors errors);
         /// <summary>
         /// 根据ID获得一个Model实体
         /// </summary>

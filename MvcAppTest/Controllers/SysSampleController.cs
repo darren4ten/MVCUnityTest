@@ -1,4 +1,5 @@
 ﻿using App.BLL;
+using App.BLL.Common;
 using App.Common;
 using App.IBLL;
 using App.Models;
@@ -78,31 +79,35 @@ namespace MvcAppTest.Controllers
         [HttpPost]
         public JsonResult Edit(SysSampleModel model)
         {
-            if (bll.Edit(model))
+            ValidationErrors errors = new ValidationErrors();
+            if (bll.Edit(model,ref errors))
             {
-                WriteLog(model.Id, string.Format("Edit sample with id {0} by user", model.Id), "Edit Sample", "Success");
-                return Json(1, JsonRequestBehavior.AllowGet);
+                LogHandler.WriteServiceLog("虚拟用户", "Id:" + model.Id + ",Name:" + model.Name, "成功", "编辑", "样例程序");
+                //WriteLog(model.Id, string.Format("Edit sample with id {0} by user", model.Id), "Edit Sample", "Success");
+                return Json(JsonHandler.CreateMessage(1,"保存成功！"), JsonRequestBehavior.AllowGet);
             }
             else
             {
-                WriteLog(model.Id, string.Format("Edit sample with id {0} by user", model.Id), "Edit Sample", "Failed");
-                return Json(0, JsonRequestBehavior.AllowGet);
+                LogHandler.WriteServiceLog("虚拟用户", "Id:" + model.Id + ",Name:" + model.Name, "失败", "编辑", "样例程序");
+                //WriteLog(model.Id, string.Format("Edit sample with id {0} by user", model.Id), "Edit Sample", "Failed");
+                return Json(JsonHandler.CreateMessage(0,"保存失败",errors.Error), JsonRequestBehavior.AllowGet);
             }
         }
 
         [HttpPost]
         public JsonResult Create(SysSampleModel model)
         {
-
-            if (bll.Create(model))
+            ValidationErrors errors = new ValidationErrors();
+            if (bll.Create(model, ref errors))
             {
-                WriteLog(model.Id, string.Format("Create sample with id {0} by user", model.Id), "Edit Sample", "Success");
-                return Json(1, JsonRequestBehavior.AllowGet);
+                LogHandler.WriteServiceLog("虚拟用户", "Id:" + model.Id + ",Name:" + model.Name, "成功", "创建", "样例程序");
+                //WriteLog(model.Id, string.Format("Create sample with id {0} by user", model.Id), "Edit Sample", "Success");
+                return Json(JsonHandler.CreateMessage(1,"插入成功！"), JsonRequestBehavior.AllowGet);
             }
             else
             {
-                WriteLog(model.Id, string.Format("Create sample with id {0} by user", model.Id), "Edit Sample", "Failed");
-                return Json(0, JsonRequestBehavior.AllowGet);
+                LogHandler.WriteServiceLog("虚拟用户", "Id:" + model.Id + ",Name:" + model.Name, "失败", "创建", "样例程序");
+                return Json(JsonHandler.CreateMessage(0,"创建失败",errors.Error), JsonRequestBehavior.AllowGet);
             }
 
         }

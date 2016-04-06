@@ -14,7 +14,7 @@ namespace App.BLL
     {
         [Dependency]
         public ISysLogRepository repository { get; set; }
-        public List<Models.SysLog> GetList(ref Common.GridPager pager, string queryStr)
+        public List<Models.SysLog> GetList(ref App.Common.GridPager pager, string queryStr)
         {
             using (Entities entity = new Entities())
             {

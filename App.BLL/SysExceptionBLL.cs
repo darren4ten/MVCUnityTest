@@ -1,6 +1,7 @@
 ﻿using App.IBLL;
 using App.IDAL;
 using App.Models;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace App.BLL
 {
     public class SysExceptionBLL : ISysExceptionBLL
     {
+        [Dependency]
         public ISysExceptionRepository repository { get; set; }
-        public List<Models.SysException> GetList(ref Common.GridPager pager, string queryStr)
+        public List<Models.SysException> GetList(ref App.Common.GridPager pager, string queryStr)
         {
             using (Entities entity = new Entities())
             {

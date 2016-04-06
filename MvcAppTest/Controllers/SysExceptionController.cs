@@ -3,6 +3,7 @@ using App.IBLL;
 using App.Models;
 using App.Models.Sys;
 using Microsoft.Practices.Unity;
+using MvcAppTest.Controllers.ExceptionUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,5 +71,11 @@ namespace MvcAppTest.Controllers
         }
 
         #endregion
+
+        public ActionResult Error()
+        {
+            BaseException exception = new BaseException();
+            return View(exception);
+        }
     }
 }

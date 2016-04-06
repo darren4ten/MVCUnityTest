@@ -23,7 +23,8 @@ namespace MvcAppTest.Controllers
             account.Id = "admin";
             account.TrueName = "Darren Teng";
             Session["Account"] = account;
-
+            //int a = 1;
+            //int b = 99 / (a - 1);
             return View();
         }
 
