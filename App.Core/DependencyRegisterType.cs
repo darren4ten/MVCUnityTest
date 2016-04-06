@@ -20,6 +20,11 @@ namespace App.Core
             container.RegisterType<ISysSampleRepository, SysSampleRepository>();
             container.RegisterType<IHomeBLL, HomeBLL>();
             container.RegisterType<IHomeRepository, HomeRepository>();
+            container.RegisterType<ISysLogBLL, SysLogBLL>();
+            container.RegisterType<ISysLogRepository, SysLogRepository>();
+              container.RegisterType<ISysExceptionBLL, SysExceptionBLL>();
+            container.RegisterType<ISysExceptionRepository, SysExceptionRepository>();
         }
+        
     }
 }

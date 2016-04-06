@@ -1,5 +1,6 @@
 ﻿using App.IBLL;
 using App.Models;
+using App.Models.Sys;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace MvcAppTest.Controllers
 
         public ActionResult Index()
         {
+            AccountModel account = new AccountModel();
+            account.Id = "admin";
+            account.TrueName = "Darren Teng";
+            Session["Account"] = account;
+
             return View();
         }
 

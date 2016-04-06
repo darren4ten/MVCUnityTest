@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HomeBLL.cs" />
+    <Compile Include="SysExceptionBLL.cs" />
+    <Compile Include="SysLogBLL.cs" />
     <Compile Include="SysSampleBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

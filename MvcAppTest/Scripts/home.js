@@ -115,9 +115,6 @@ $(function () {
     });
 });
 
-
-
-
 function addTab(subtitle, url, icon) {
     if (!$("#mainTab").tabs('exists', subtitle)) {
         $("#mainTab").tabs('add', {

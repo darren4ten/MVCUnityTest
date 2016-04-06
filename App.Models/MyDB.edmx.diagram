@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="MyDBModel.SysSample" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyDBModel.SysModule" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="MyDBModel.FK_SysModule_SysModule" />
+        <EntityTypeShape EntityType="MyDBModel.SysException" Width="1.5" PointX="1.375" PointY="3.5" />
+        <EntityTypeShape EntityType="MyDBModel.SysLog" Width="1.5" PointX="6.125" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

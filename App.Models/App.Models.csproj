@@ -51,6 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SysException.cs">
+      <DependentUpon>MyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SysLog.cs">
+      <DependentUpon>MyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys\AccountModel.cs" />
     <Compile Include="MyDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -73,6 +80,8 @@
     <Compile Include="SysSample.cs">
       <DependentUpon>MyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sys\SysExceptionModel.cs" />
+    <Compile Include="Sys\SysLogModel.cs" />
     <Compile Include="Sys\SysSampleModel.cs" />
   </ItemGroup>
   <ItemGroup>
