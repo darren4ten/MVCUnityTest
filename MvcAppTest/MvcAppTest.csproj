@@ -192,9 +192,13 @@
     <Compile Include="Controllers\SysExceptionController.cs" />
     <Compile Include="Controllers\SysLogController.cs" />
     <Compile Include="Controllers\SysSampleController.cs" />
+    <Compile Include="Core\verify_code.ashx.cs">
+      <DependentUpon>verify_code.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ExtendMvcHtml.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -432,6 +436,7 @@
     <Content Include="Scripts\easyui\src\jquery.accordion.js.baiduyun.uploading.cfg" />
     <Content Include="Scripts\easyui\src\jquery.calendar.js.baiduyun.uploading.cfg" />
     <Content Include="Scripts\easyui\src\jquery.combobox.js.baiduyun.uploading.cfg" />
+    <Content Include="Core\verify_code.ashx" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\easyui\easyloader.js" />
     <Content Include="Scripts\easyui\jquery-1.8.0.min.js" />

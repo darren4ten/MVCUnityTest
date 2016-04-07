@@ -1,4 +1,5 @@
 ﻿@using App.Common;
+@using MvcAppTest.Helper;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Index_Layout.cshtml";
@@ -15,11 +16,12 @@
     <a id="btnDelete" style="float: left;" class="l-btn l-btn-plain"><span class="l-btn-left"><span class="l-btn-text icon-remove" style="padding-left: 20px;">删除</span></span></a><div class="datagrid-btn-separator"></div>
     <a id="btnExport" style="float: left;" class="l-btn l-btn-plain"><span class="l-btn-left"><span class="l-btn-text icon-export" style="padding-left: 20px;">导出</span></span></a>
     <a id="btnReload" style="float: left;" class="l-btn l-btn-plain"><span class="l-btn-left"><span class="l-btn-text icon-reload" style="padding-left: 20px;">刷新</span></span></a>
+    @Html.ToolButton("btnExport", "icon-export","导出",true)
 </div>
 <table id="List"></table>
 <script type="text/javascript" src="Scripts/jquery.easyui.plus.js"></script>
 <script type="text/javascript">
-  
+
     //ifram 返回
     function frameReturnByClose() {
         $("#modalwindow").window('close');
@@ -47,7 +49,7 @@
         $("#btnCreate").click(function () {
             $("#modalwindow").html("<iframe width='100%' height='98%' scrolling='no' frameborder='0'' src='/SysSample/Create'></iframe>");
             $("#modalwindow").window({ title: '新增', width: 700, height: 400, iconCls: 'icon-add' }).window('open');
-           
+
         });
         $("#btnEdit").click(function () {
             var row = $('#List').datagrid('getSelected');
@@ -96,6 +98,39 @@
 </script>
 
 <script type="text/javascript">
+    Date.prototype.format = function (format) {
+        var o = {
+            "M+": this.getMonth() + 1,
+            "d+": this.getDate(),
+            "h+": this.getHours(),
+            "m+": this.getMinutes(),
+            "s+": this.getSeconds(),
+            "q+": Math.floor((this.getMonth() + 3) / 3),
+            "S": this.getMilliseconds()
+        }
+        if (/(y+)/.test(format)) {
+            format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(format)) {
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+            }
+        }
+        return format;
+    }
+    Date.prototype.DateAdd = function (strInterval, Number) {
+        var dtTmp = this;
+        switch (strInterval) {
+            case 's': return new Date(Date.parse(dtTmp) + (1000 * Number));
+            case 'n': return new Date(Date.parse(dtTmp) + (60000 * Number));
+            case 'h': return new Date(Date.parse(dtTmp) + (3600000 * Number));
+            case 'd': return new Date(Date.parse(dtTmp) + (86400000 * Number));
+            case 'w': return new Date(Date.parse(dtTmp) + ((86400000 * 7) * Number));
+            case 'q': return new Date(dtTmp.getFullYear(), (dtTmp.getMonth()) + Number * 3, dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());
+            case 'm': return new Date(dtTmp.getFullYear(), (dtTmp.getMonth()) + Number, dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());
+            case 'y': return new Date((dtTmp.getFullYear() + Number), dtTmp.getMonth(), dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());
+        }
+    }
     $(function () {
         $('#List').datagrid({
             url: '/SysSample/GetList',
@@ -112,11 +147,39 @@
             striped: true, //奇偶行是否区分
             singleSelect: true,//单选模式
             rownumbers: true,//行号
+            onLoadSuccess: function (data) {
+                if (data) {
+                    for (var i in data.rows) {
+                        var cur = data.rows[i];
+                        if (cur) {
+                            var dateBirthStrArr = cur.Bir ? cur.Bir.match('[0-9]+') : '';
+                            var dateCreateTimeStrArr = cur.CreateTime ? cur.CreateTime.match('[0-9]+') : '';
+                            if (dateBirthStrArr && dateBirthStrArr.length > 0) {
+                                cur.Bir = new Date(parseFloat(dateBirthStrArr[0])).format('yyyy-MM-dd');
+                            }
+                            if (dateCreateTimeStrArr && dateCreateTimeStrArr.length > 0) {
+                                cur.CreateTime = new Date(parseFloat(dateCreateTimeStrArr[0])).format('yyyy-MM-dd');
+                            }
+                        }
+                        data.rows[i] = cur;
+                    }
+
+                }
+            },
             columns: [[
                 { field: 'Id', title: 'ID', width: 80 },
                 { field: 'Name', title: '名称', width: 120 },
-                { field: 'Age', title: '年龄', width: 80, align: 'right' },
-                { field: 'Bir', title: '生日', width: 80, align: 'right' },
+                {
+                    field: 'Age', title: '年龄', width: 80, align: 'right'
+                },
+                {
+                    field: 'Bir', title: '生日', width: 80, align: 'right', formatter: function (value, row, index) {
+                        var dateStrArr = value ? value.match('[0-9]+') : '';
+                        if (dateStrArr && dateStrArr.length > 0) {
+                            value = new Date(parseFloat(dateStrArr[0])).format('yyyy-MM-dd');
+                        }
+                    }
+                },
                 { field: 'Photo', title: '照片', width: 250 },
                 { field: 'Note', title: '说明', width: 60, align: 'center' },
                 { field: 'CreateTime', title: '创建时间', width: 60, align: 'center' }
