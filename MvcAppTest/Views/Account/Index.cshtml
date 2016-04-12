@@ -82,8 +82,16 @@
                 return;
             }
             $("#Loading").show();
-
-            alert(1);
+            $.post('/Account/Login',
+                { UserName: $("#UserName").val(), Password: $("#Password").val(), Code: $("#ValidateCode").val() },
+                    function (data) {
+                        if (data.type == "1") {
+                            window.location = "/Home/Index"
+                        } else {
+                            $("#mes").html(data.message);
+                        }
+                        $("#Loading").hide();
+                    }, "json");
             return false;
         }
 
@@ -141,33 +149,33 @@
                                 <a href="javascript:$('#codeImg').trigger('click')">看不清？</a>
                             </td>
                         </tr>
-                        </tr>
+            </tr>
 
 
+            <tr>
+
+                <td colspan="2">
+                    <table style="width: 100%;">
                         <tr>
-
-                            <td colspan="2">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td style="width:40px;">&nbsp;</td>
-                                        <td>
-                                            <div id="mes" class="field-validation-error">
-                                            </div>
-                                            <div id="Loading" style="display: none" class='panel-loading'><font color='#000'>加载中...</font></div>
-                                        </td>
-                                        <td style="width: 100px;">
-                                            <a id="LoginSys" href="javascript:void(0)" class="easyui-linkbutton l-btn"><span class="l-btn-left"><span class="l-btn-text icon-ok" style="padding-left: 20px;">登录</span></span></a>
-                                        </td>
-                                    </tr>
-
-                                </table>
-
+                            <td style="width:40px;">&nbsp;</td>
+                            <td>
+                                <div id="mes" class="field-validation-error">
+                                </div>
+                                <div id="Loading" style="display: none" class='panel-loading'><font color='#000'>加载中...</font></div>
+                            </td>
+                            <td style="width: 100px;">
+                                <a id="LoginSys" href="javascript:void(0)" class="easyui-linkbutton l-btn"><span class="l-btn-left"><span class="l-btn-text icon-ok" style="padding-left: 20px;">登录</span></span></a>
                             </td>
                         </tr>
 
                     </table>
+
                 </td>
             </tr>
+
+        </table>
+        </td>
+        </tr>
         </table>
 
     </div>

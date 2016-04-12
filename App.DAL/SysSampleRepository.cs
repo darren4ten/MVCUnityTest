@@ -23,25 +23,28 @@ namespace App.DAL
 
             IQueryable<SysSample> list = db.SysSamples.AsQueryable();
             pager.totalRows = GetTotalNumber();
-            pager.order = string.IsNullOrEmpty(pager.order) ? "id" : pager.order;
-            switch (pager.order.ToLower())
-            {
-                case "id": {
-                    return list.OrderBy(p => p.Id).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
-                }; 
-                case "name": {
-                    return list.OrderBy(p => p.Name).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
-                }; 
-                case "age": {
-                    return list.OrderBy(p => p.Age).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
-                };
-                case "CreateTime": {
-                    return list.OrderBy(p => p.CreateTime).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
-                }; 
-                default:
-                    return list.OrderBy(p => p.Id).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
-            }
-           
+            pager.order = string.IsNullOrEmpty(pager.order) ? "ASC" : pager.order;
+            var sortedData = LinqHelper.DataSorting(list, pager.sort, pager.order);
+            return LinqHelper.DataPaging<SysSample>(sortedData, pager.page, pager.rows);
+            //switch (pager.order.ToLower())
+            //{
+            //    case "id": {
+            //        return list.OrderBy(p => p.Id).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+            //    }; 
+            //    case "name": {
+            //        return list.OrderBy(p => p.Name).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+            //    }; 
+            //    case "age": {
+            //        return list.OrderBy(p => p.Age).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+            //    };
+            //    case "CreateTime": {
+            //        return list.OrderBy(p => p.CreateTime).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+            //    }; 
+            //    default:
+            //        return list.OrderBy(p => p.Id).Skip(pager.rows * (pager.page - 1)).Take(pager.rows);
+            //}
+
+
         }
 
         public int GetTotalNumber()

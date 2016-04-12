@@ -29,5 +29,10 @@ namespace App.Models
         public virtual DbSet<SysModule> SysModules { get; set; }
         public virtual DbSet<SysException> SysExceptions { get; set; }
         public virtual DbSet<SysLog> SysLogs { get; set; }
+        public virtual DbSet<SysModuleOperate> SysModuleOperates { get; set; }
+        public virtual DbSet<SysRight> SysRights { get; set; }
+        public virtual DbSet<SysRightOperate> SysRightOperates { get; set; }
+        public virtual DbSet<SysRole> SysRoles { get; set; }
+        public virtual DbSet<SysUser> SysUsers { get; set; }
     }
 }

@@ -22,9 +22,11 @@ namespace App.Core
             container.RegisterType<IHomeRepository, HomeRepository>();
             container.RegisterType<ISysLogBLL, SysLogBLL>();
             container.RegisterType<ISysLogRepository, SysLogRepository>();
-              container.RegisterType<ISysExceptionBLL, SysExceptionBLL>();
+            container.RegisterType<ISysExceptionBLL, SysExceptionBLL>();
             container.RegisterType<ISysExceptionRepository, SysExceptionRepository>();
+            container.RegisterType<IAccountBLL, AccountBLL>();
+            container.RegisterType<IAccountRepository, AccountRepository>();
         }
-        
+
     }
 }

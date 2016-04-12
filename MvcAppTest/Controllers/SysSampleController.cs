@@ -26,6 +26,8 @@ namespace MvcAppTest.Controllers
             GridPager pager = new GridPager();
             pager.rows = 5;
             pager.page = 1;
+            pager.order = "desc";
+            pager.sort = "id";
             var data = bll.GetList(pager);
             return View(data);
         }

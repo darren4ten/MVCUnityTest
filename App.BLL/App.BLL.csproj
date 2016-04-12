@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountBLL.cs" />
     <Compile Include="Common\ExceptionHander.cs" />
     <Compile Include="Common\LogHandler.cs" />
     <Compile Include="HomeBLL.cs" />
