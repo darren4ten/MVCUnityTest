@@ -433,6 +433,10 @@
     <Content Include="Content\themes\gray\images\Thumbs.db" />
     <Content Include="Content\themes\metro\images\Thumbs.db" />
     <Content Include="Libs\Microsoft.Practices.Unity.dll" />
+    <Content Include="MyDB.ldf">
+      <DependentUpon>MyDB.mdf</DependentUpon>
+    </Content>
+    <Content Include="MyDB.mdf" />
     <Content Include="Scripts\easyui\src\jquery.accordion.js.baiduyun.uploading.cfg" />
     <Content Include="Scripts\easyui\src\jquery.calendar.js.baiduyun.uploading.cfg" />
     <Content Include="Scripts\easyui\src\jquery.combobox.js.baiduyun.uploading.cfg" />
