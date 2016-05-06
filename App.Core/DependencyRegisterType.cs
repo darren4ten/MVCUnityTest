@@ -16,6 +16,9 @@ namespace App.Core
         //系统注入
         public static void Container_Sys(ref UnityContainer container)
         {
+
+            container.RegisterType<ISysUserBLL, SysUserBLL>();
+            container.RegisterType<ISysRightRepository, SysRightRepository>();
             container.RegisterType<ISysSampleBLL, SysSampleBLL>();//样例
             container.RegisterType<ISysSampleRepository, SysSampleRepository>();
             container.RegisterType<IHomeBLL, HomeBLL>();

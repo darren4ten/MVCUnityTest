@@ -195,6 +195,7 @@
     <Compile Include="Core\verify_code.ashx.cs">
       <DependentUpon>verify_code.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Filters\SupportFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -645,10 +646,10 @@
     <Content Include="Views\SysException\Index.cshtml" />
     <Content Include="Views\SysException\Details.cshtml" />
     <Content Include="Views\SysException\Error.cshtml" />
+    <Content Include="Views\SysSample\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Filters\" />
     <Folder Include="Scripts\easyui\demo\" />
   </ItemGroup>
   <ItemGroup>

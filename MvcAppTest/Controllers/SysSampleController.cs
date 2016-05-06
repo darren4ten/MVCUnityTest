@@ -5,6 +5,7 @@ using App.IBLL;
 using App.Models;
 using App.Models.Sys;
 using Microsoft.Practices.Unity;
+using MvcAppTest.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace MvcAppTest.Controllers
             var data = bll.GetList(pager);
             return View(data);
         }
-
+        [SupportFilter(ActionName = "Create")]
         public ActionResult Create()
         {
             return View();
@@ -78,25 +79,32 @@ namespace MvcAppTest.Controllers
             return View(data);
         }
 
+        [SupportFilter]
+        public ActionResult Test()
+        {
+            return View();
+        }
+
         [HttpPost]
         public JsonResult Edit(SysSampleModel model)
         {
             ValidationErrors errors = new ValidationErrors();
-            if (bll.Edit(model,ref errors))
+            if (bll.Edit(model, ref errors))
             {
                 LogHandler.WriteServiceLog("虚拟用户", "Id:" + model.Id + ",Name:" + model.Name, "成功", "编辑", "样例程序");
                 //WriteLog(model.Id, string.Format("Edit sample with id {0} by user", model.Id), "Edit Sample", "Success");
-                return Json(JsonHandler.CreateMessage(1,"保存成功！"), JsonRequestBehavior.AllowGet);
+                return Json(JsonHandler.CreateMessage(1, "保存成功！"), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 LogHandler.WriteServiceLog("虚拟用户", "Id:" + model.Id + ",Name:" + model.Name, "失败", "编辑", "样例程序");
                 //WriteLog(model.Id, string.Format("Edit sample with id {0} by user", model.Id), "Edit Sample", "Failed");
-                return Json(JsonHandler.CreateMessage(0,"保存失败",errors.Error), JsonRequestBehavior.AllowGet);
+                return Json(JsonHandler.CreateMessage(0, "保存失败", errors.Error), JsonRequestBehavior.AllowGet);
             }
         }
 
         [HttpPost]
+
         public JsonResult Create(SysSampleModel model)
         {
             ValidationErrors errors = new ValidationErrors();
@@ -104,12 +112,12 @@ namespace MvcAppTest.Controllers
             {
                 LogHandler.WriteServiceLog("虚拟用户", "Id:" + model.Id + ",Name:" + model.Name, "成功", "创建", "样例程序");
                 //WriteLog(model.Id, string.Format("Create sample with id {0} by user", model.Id), "Edit Sample", "Success");
-                return Json(JsonHandler.CreateMessage(1,"插入成功！"), JsonRequestBehavior.AllowGet);
+                return Json(JsonHandler.CreateMessage(1, "插入成功！"), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 LogHandler.WriteServiceLog("虚拟用户", "Id:" + model.Id + ",Name:" + model.Name, "失败", "创建", "样例程序");
-                return Json(JsonHandler.CreateMessage(0,"创建失败",errors.Error), JsonRequestBehavior.AllowGet);
+                return Json(JsonHandler.CreateMessage(0, "创建失败", errors.Error), JsonRequestBehavior.AllowGet);
             }
 
         }
